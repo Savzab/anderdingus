@@ -1,0 +1,20 @@
+while true do
+  wait(10)
+  print("refreshed")
+local Players = game:GetService("Players")
+
+local function highlightPlayer(player)
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    local highlight = Instance.new("Highlight")
+    highlight.Parent = character
+    highlight.OutlineColor = player.TeamColor.Color
+end
+
+-- Highlight existing players
+for _, player in pairs(Players:GetPlayers()) do
+    highlightPlayer(player)
+end
+
+-- Highlight new players
+Players.PlayerAdded:Connect(highlightPlayer)
